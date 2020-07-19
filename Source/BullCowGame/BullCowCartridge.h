@@ -18,10 +18,13 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void EndGame();
 	void ProcessGuess(const FString &input);
 	TCHAR IsIsogram(const FString &word);
+	void GetBullCows(const FString &Guess, int32 &BullCount,int32 &CowCount) const;
+	TArray<FString> GetIsogramArray(const TArray<FString> &Words);
 
 	// Your declarations go below!
 	private:
 	FString HiddenWord;
 	int32 Lives;
 	bool bGameOver;
+	TArray<FString> IsogramArray;
 };

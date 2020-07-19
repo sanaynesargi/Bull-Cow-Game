@@ -21,10 +21,40 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
 }
 
+void UBullCowCartridge::GetBullCows(const FString &Guess, int32 &BullCount,int32 &CowCount) const
+{
+    BullCount = 0;
+    CowCount = 0;
+
+    // for every index of guess is same as index Hidden, BullCount++
+    // if not a bull was it a cow, if yes CowCount++
+
+    for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); GuessIndex++)
+    {
+        if (Guess[GuessIndex] == HiddenWord[GuessIndex])
+        {
+            BullCount++;
+            continue;
+        }
+
+        for (int32 HiddenIndex = 0; HiddenIndex < HiddenWord.Len(); HiddenIndex++)
+        {
+            if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
+            {
+                CowCount++;
+            }
+            
+        }
+        
+    }
+}
+
 void UBullCowCartridge::SetupGame()
 {
     // print welcome message
-    HiddenWord = HiddenWords[FMath::FRand() * 121]; // set hidden word
+    IsogramArray = GetIsogramArray(HiddenWords);
+
+    HiddenWord = IsogramArray[FMath::FRand() * IsogramArray.Num() - 1]; // set hidden word
     Lives = HiddenWord.Len(); // set lives
     bGameOver = false;
     PrintLine(TEXT("--> Hello, Welcome to Bull Cows!!\n--> Press Enter to Begin.\n--> Press tab to write to the terminal.\n--> Guess the %i letter word.\n--> You have %i lives.\n--> You have %d word possibtiliies. Good Luck!!"), HiddenWord.Len(), Lives, HiddenWords.Num());
@@ -111,12 +141,32 @@ void UBullCowCartridge::ProcessGuess(const FString &input)
         bWrongWordType = false;
         
     } else {
+        int32 Bulls, Cows;
+        GetBullCows(input, Bulls, Cows);
+        
+        PrintLine(TEXT("You have %i bull (s) and %i cow (s)"), Bulls, Cows);
+
         PrintLine(TEXT("You have lost a life, you have %d lives left :("), --Lives); // decrement a life within the statement
     }
     // check if lives are greater than 0
     // if yes then GuessAgain
     // if no then print fail message, and HiddenWord?
     // press enter to play again
+}
+
+TArray<FString> UBullCowCartridge::GetIsogramArray(const TArray<FString> &Words)
+{
+    TArray<FString> Isograms;
+
+    for (int32 i = 0; i < Words.Num(); i++)
+    {
+        if (IsIsogram(Words[i]) == TCHAR('T'))
+        {
+            Isograms.Emplace(Words[i]);
+        }
+    }
+
+    return Isograms;
 }
 
 TCHAR UBullCowCartridge::IsIsogram(const FString &word)
@@ -129,7 +179,6 @@ TCHAR UBullCowCartridge::IsIsogram(const FString &word)
             {
                 return TCHAR('F');
             }
-        }
-    }
+         }   }
     return TCHAR('T');
 }
