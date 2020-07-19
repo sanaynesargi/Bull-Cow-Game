@@ -1,0 +1,5 @@
+C:\Users\sanay\Documents\BullCowGame\BullCowGame-starter-kit\Intermediate\Build\Win64\UE4Editor\Development\BullCowGame\Definitions.BullCowGame.h
+C:\Users\sanay\Desktop\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Users\sanay\Desktop\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+C:\Users\sanay\Documents\BullCowGame\BullCowGame-starter-kit\Source\BullCowGame/Console/Cartridge.h
+C:\Users\sanay\Documents\BullCowGame\BullCowGame-starter-kit\Intermediate\Build\Win64\UE4Editor\Inc\BullCowGame\Cartridge.generated.h
