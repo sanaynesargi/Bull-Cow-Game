@@ -27,7 +27,8 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void ProcessGuess(const FString &input);
 	TCHAR IsIsogram(const FString &word);
 	FBullCowCount GetBullCows(const FString &Guess) const;
-	TArray<FString> GetIsogramArray(const TArray<FString> &Words);
+	TArray<FString> GetIsogramArray(const TArray<FString> &Words, int32 &min, int32 &max);
+	FString SetMode(const FString &mode) const;
 
 	// Your declarations go below!
 	private:
@@ -35,4 +36,7 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	int32 Lives;
 	bool bGameOver;
 	TArray<FString> IsogramArray;
+	int32 min;
+	int32 max;
+	bool bSetMode = false;
 };
